@@ -11,23 +11,24 @@
 
 <body>
     <header>
-        <h1>Welcome to my phone hunter page</h1>
+        <h1 class="text-center">Welcome to my phone hunter page</h1>
     </header>
 
-    <main>
-        <section class="container">
+    <main class="container">
+        <!-- displar search result -->
+        <section>
+            <div class="mb-2 w-50">
+                <input id="searchField" type="email" class="form-control" id="exampleFormControlInput1" placeholder="search your phone">
+              </div>
+              <div id="btn-search" class="btn btn-primary mb-2">Search</div>
+        </section>
+        <section>
             <!-- b-code -->
             <div id="phoneContainer" class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a longer card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit longer.</p>
-                        </div>
-                    </div>
-                </div>
+
+            </div>
+            <div id="no-found-massage" class=" d-none mt-4">
+                <h3 class="text-warning">No phone found . Please try a new search</h3>
             </div>
         </section>
     </main>
