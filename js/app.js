@@ -1,11 +1,11 @@
-const loadPhone = async (searchText , dataLimit) => {
+const loadPhone = async (searchText, dataLimit) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     const res = await fetch(url);
     const data = await res.json();
     displayPhones(data.data, dataLimit);
 };
 
-const displayPhones = (phones,dataLimit) => {
+const displayPhones = (phones, dataLimit) => {
     console.log(phones);
     const phoneContainer = document.getElementById('phoneContainer');
     phoneContainer.textContent = '';
@@ -53,15 +53,10 @@ const processSearch = (dataLimit) => {
     togglrLoader(true);
     const search_Field = document.getElementById('searchField');
     const searchText = search_Field.value;
-    loadPhone(searchText , dataLimit)
+    loadPhone(searchText, dataLimit)
 }
 
 document.getElementById('btn-search').addEventListener('click', function () {
-    // start loader
-    // togglrLoader(true);
-    // const search_Field = document.getElementById('searchField');
-    // const searchText = search_Field.value;
-    // loadPhone(searchText)
     processSearch(10);
 });
 const togglrLoader = isLoading => {
@@ -75,6 +70,6 @@ const togglrLoader = isLoading => {
 };
 // second way to load show all component inside api
 document.getElementById('btn-show-all').addEventListener('click', function () {
-   processSearch();
+    processSearch();
 });
-// loadPhone('iphone');
+loadPhone('iphone');
