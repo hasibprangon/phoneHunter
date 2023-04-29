@@ -1,21 +1,29 @@
-const loadPhone = async (searchText) => {
+const loadPhone = async (searchText , dataLimit) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`
     const res = await fetch(url);
     const data = await res.json();
-    displayPhones(data.data);
+    displayPhones(data.data, dataLimit);
 };
 
-const displayPhones = phones => {
+const displayPhones = (phones,dataLimit) => {
     console.log(phones);
     const phoneContainer = document.getElementById('phoneContainer');
     phoneContainer.textContent = '';
     //display 10 phones only
-    phones = phones.slice(0, 10);
+    const showAll = document.getElementById('show-all');
+    if (dataLimit && phones.length > 10) {
+
+        phones = phones.slice(0, 10);
+        showAll.classList.remove('d-none');
+    }
+    else {
+        showAll.classList.add('d-none')
+    }
     //display no phones found 
     const noPhones = document.getElementById('no-found-massage');
-    if( phones.length === 0){
-   
-    noPhones.classList.remove('d-none')
+    if (phones.length === 0) {
+
+        noPhones.classList.remove('d-none')
     }
     else {
         noPhones.classList.add('d-none')
@@ -39,22 +47,34 @@ const displayPhones = phones => {
     });
     // stop loader
     togglrLoader(false);
+};
+
+const processSearch = (dataLimit) => {
+    togglrLoader(true);
+    const search_Field = document.getElementById('searchField');
+    const searchText = search_Field.value;
+    loadPhone(searchText , dataLimit)
 }
 
 document.getElementById('btn-search').addEventListener('click', function () {
     // start loader
-    togglrLoader(true);
-    const search_Field = document.getElementById('searchField');
-    const searchText = search_Field.value;
-    loadPhone(searchText)
+    // togglrLoader(true);
+    // const search_Field = document.getElementById('searchField');
+    // const searchText = search_Field.value;
+    // loadPhone(searchText)
+    processSearch(10);
 });
-const togglrLoader = isLoading =>{
+const togglrLoader = isLoading => {
     const spinnerSection = document.getElementById('loader');
-    if(isLoading){
+    if (isLoading) {
         spinnerSection.classList.remove('d-none');
     }
-    else{
+    else {
         spinnerSection.classList.add('d-none');
     }
-}
-loadPhone('iphone');
+};
+// second way to load show all component inside api
+document.getElementById('btn-show-all').addEventListener('click', function () {
+   processSearch();
+});
+// loadPhone('iphone');
